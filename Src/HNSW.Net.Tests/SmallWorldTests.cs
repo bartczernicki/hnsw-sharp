@@ -41,7 +41,7 @@ namespace HNSW.Net.Tests
         public void KNNSearchTest()
         {
             var parameters = new SmallWorld<float[], float>.Parameters();
-            var graph = new SmallWorld<float[], float>(DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, parameters);
+            var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, parameters);
             graph.AddItems(vectors);
 
             int bestWrong = 0;
@@ -73,7 +73,7 @@ namespace HNSW.Net.Tests
         public void KNNSearchTestAlgorithm4(bool expandBestSelection, bool keepPrunedConnections )
         {
             var parameters = new SmallWorld<float[], float>.Parameters() { NeighbourHeuristic = NeighbourSelectionHeuristic.SelectHeuristic, ExpandBestSelection = expandBestSelection, KeepPrunedConnections = keepPrunedConnections };
-            var graph = new SmallWorld<float[], float>(DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, parameters);
+            var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, parameters);
             graph.AddItems(vectors);
 
             int bestWrong = 0;
@@ -112,7 +112,7 @@ namespace HNSW.Net.Tests
                     LevelLambda = 1 / Math.Log(15),
                 };
 
-                var graph = new SmallWorld<float[], float>(DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, parameters);
+                var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, parameters);
                 graph.AddItems(vectors);
 
                 graph.SerializeGraph(stream);
@@ -120,7 +120,7 @@ namespace HNSW.Net.Tests
             }
             stream.Position = 0;
 
-            var copy = SmallWorld<float[], float>.DeserializeGraph(vectors, DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, stream);
+            var copy = SmallWorld<float[], float>.DeserializeGraph(vectors, CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, stream);
 
             Assert.AreEqual(original, copy.Print());
         }

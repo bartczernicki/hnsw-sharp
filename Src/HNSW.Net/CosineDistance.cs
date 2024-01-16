@@ -9,6 +9,7 @@ namespace HNSW.Net
     using System.Collections.Generic;
     using System.Numerics;
     using System.Runtime.CompilerServices;
+    using System.Numerics.Tensors;
 
     /// <summary>
     /// Calculates cosine similarity.
@@ -61,7 +62,7 @@ namespace HNSW.Net
         /// <returns>Cosine distance between u and v.</returns>
         public static float ForUnits(float[] u, float[] v)
         {
-            if (u.Length!= v.Length)
+            if (u.Length != v.Length)
             {
                 throw new ArgumentException("Vectors have non-matching dimensions");
             }

@@ -121,9 +121,11 @@ namespace HNSW.Net.Demo
 
             Console.Write($"Saving HNSW graph to '${Path.Combine(Directory.GetCurrentDirectory(), pathPrefix)}'... ");
             clock = Stopwatch.StartNew();
-            BinaryFormatter formatter = new BinaryFormatter();
+
             MemoryStream sampleVectorsStream = new MemoryStream();
+
 #pragma warning disable SYSLIB0011 // Type or member is obsolete
+            BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(sampleVectorsStream, sampleVectors);
 #pragma warning restore SYSLIB0011 // Type or member is obsolete
             File.WriteAllBytes($"{pathPrefix}.{VectorsPathSuffix}", sampleVectorsStream.ToArray());
@@ -143,8 +145,9 @@ namespace HNSW.Net.Demo
 
             Console.Write("Loading HNSW graph... ");
             clock = Stopwatch.StartNew();
-            BinaryFormatter formatter = new BinaryFormatter();
+
 #pragma warning disable SYSLIB0011 // Type or member is obsolete
+            BinaryFormatter formatter = new BinaryFormatter();
             var sampleVectors = (List<float[]>)formatter.Deserialize(new MemoryStream(File.ReadAllBytes($"{pathPrefix}.{VectorsPathSuffix}")));
 #pragma warning restore SYSLIB0011 // Type or member is obsolete
             SmallWorld<float[], float> world;

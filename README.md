@@ -13,7 +13,7 @@ Check out the following code snippets once you've added the library reference to
 ```c#
 var parameters = new SmallWorld<float[], float>.Parameters()
 {
-  M = 15,
+  M = 15, // defines the amount of neighbor connections for each vector, more connections create dense graphs with potentially higher recall
   LevelLambda = 1 / Math.Log(15),
 };
 

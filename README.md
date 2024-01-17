@@ -18,7 +18,7 @@ var parameters = new SmallWorld<float[], float>.Parameters()
 };
 
 float[] vectors = GetFloatVectors();
-var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance,
+var graph = new SmallWorld<float[], float>(DotProductDistance.DotProductOptimized, DefaultRandomGenerator.Instance,
   parameters, threadSafe: true);
 graph.AddItems(vectors);
 ```
@@ -36,7 +36,7 @@ SmallWorld<float[], float> graph = GetGraph();
 byte[] buffer = graph.SerializeGraph(); // buffer stores information about parameters and graph edges
 
 // distance function must be the same as the one which was used for building the original graph
-var copy = new SmallWorld<float[], float>(CosineDistance.NonOptimized);
+var copy = new SmallWorld<float[], float>(DotProductDistance.DotProductOptimized);
 copy.DeserializeGraph(vectors, buffer); // the original vectors to attach to the "copy" vertices
 ```
 ##### Distance functions

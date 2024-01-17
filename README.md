@@ -18,8 +18,8 @@ var parameters = new SmallWorld<float[], float>.Parameters()
 };
 
 float[] vectors = GetFloatVectors();
-var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized);
-graph.BuildGraph(vectors, new Random(42), parameters);
+var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, parameters, threadSafe: true);
+graph.AddItems(vectors);
 ```
 ##### How to run k-NN search?
 ```c#

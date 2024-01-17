@@ -24,7 +24,9 @@ namespace HNSW.Net.Tests
         private const float FloatError = 0.000000900f;
 
         private IReadOnlyList<float[]> embeddingsVectors;
+        private IReadOnlyList<float[]> embeddingsQuestions;
         private IReadOnlyList<DbPedia> dbPedias;
+        private IReadOnlyList<Question> questions;
 
         /// <summary>
         /// Initializes test resources.
@@ -36,6 +38,10 @@ namespace HNSW.Net.Tests
             var data = File.ReadAllText(@"dbpedias.json");
             dbPedias = System.Text.Json.JsonSerializer.Deserialize<List<DbPedia>>(data);
             embeddingsVectors = dbPedias.Select(a => a.Embeddings.ToArray()).ToList();
+            // load actual question
+            var questionData = File.ReadAllText(@"question.json");
+            questions = System.Text.Json.JsonSerializer.Deserialize<List<Question>>(questionData);
+            embeddingsQuestions = questions.Select(a => a.Embeddings.ToArray()).ToList();
         }
 
         /// <summary>
@@ -169,6 +175,26 @@ namespace HNSW.Net.Tests
 
             // Ensure the top match is the first vector
             Assert.AreEqual(0, maxError, FloatError);
+        }
+
+        [TestMethod]
+        public void FindVectorFromQuestion()
+        {
+            float maxError = float.MinValue;
+
+            var parameters = new SmallWorld<float[], float>.Parameters() { NeighbourHeuristic = NeighbourSelectionHeuristic.SelectHeuristic, ExpandBestSelection = true, KeepPrunedConnections = true };
+            var graph = new SmallWorld<float[], float>(DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, parameters);
+            var ids = graph.AddItems(embeddingsVectors);
+
+            var searchResults = graph.KNNSearch(embeddingsQuestions[0], 20);
+            // Ensure 100 results are returned
+            Assert.AreEqual(20, searchResults.Count);
+
+            var topMatches = searchResults.OrderBy(r => r.Distance).Take(2).Select(a => a.Id).ToList();
+
+            // Ensure the top match is the first vector
+            CollectionAssert.Contains(topMatches, 3);
+            CollectionAssert.Contains(topMatches, 31);
         }
     }
 }

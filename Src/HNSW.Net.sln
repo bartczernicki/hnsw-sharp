@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34414.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HNSW.Net", "HNSW.Net\HNSW.Net.csproj", "{1A7D27E7-4F89-4197-BA86-2A7E80E702DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HNSW.Net.Tests", "HNSW.Net.Tests\HNSW.Net.Tests.csproj", "{F1C038AB-3654-45F3-BE98-378D4EDC2762}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HNSW.Net.Demo", "HNSW.Net.Demo\HNSW.Net.Demo.csproj", "{6F62C4BE-5D1C-4302-9813-E707EB902221}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azuredevops", ".azuredevops", "{07C754D2-86A3-46F1-B78D-9C81F8974996}"
-	ProjectSection(SolutionItems) = preProject
-		..\build-nuget.yml = ..\build-nuget.yml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

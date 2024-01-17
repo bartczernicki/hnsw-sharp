@@ -46,6 +46,7 @@ CosineDistance.NonOptimized // most generic version works for all cases
 CosineDistance.ForUnits     // gives correct result only when arguments are "unit" vectors
 CosineDistance.SIMD         // uses SIMD instructions to optimize calculations
 CosineDistance.SIMDForUnits // uses SIMD and requires arguments to be "units"
+DotProductDistance.DotProductOptimized // Seperated, optimized with .NET 8 Tensor primitives for AVX (can fall back to non-hardware)
 ```
 But the API allows to inject any custom distance function tailored specifically for your needs.
 

@@ -13,7 +13,7 @@ namespace HNSW.Net
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DotProductOptimized(float[] lhs, float[] rhs)
         {
-            return TensorPrimitives.Dot(lhs, rhs);
+            return (1 - TensorPrimitives.Dot(lhs, rhs));
         }
     }
 }

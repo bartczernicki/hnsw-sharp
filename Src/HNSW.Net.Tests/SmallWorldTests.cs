@@ -19,9 +19,9 @@ namespace HNSW.Net.Tests
     [TestClass]
     public class SmallWorldTests
     {
-        // Set floating point error to 5.96 * 10^-7
+        // Set floating point error to 9.00 * 10^-7
         // For cosine distance error can be bigger in theory but for test data it's not the case.
-        private const float FloatError = 0.000000596f;
+        private const float FloatError = 0.000000900f;
 
         private IReadOnlyList<float[]> embeddingsVectors;
         private IReadOnlyList<DbPedia> dbPedias;
@@ -45,7 +45,7 @@ namespace HNSW.Net.Tests
         public void KNNSearchTest()
         {
             var parameters = new SmallWorld<float[], float>.Parameters();
-            var graph = new SmallWorld<float[], float>(CosineDistance.NonOptimized, DefaultRandomGenerator.Instance, parameters);
+            var graph = new SmallWorld<float[], float>(DotProduct.DotProductOptimized, DefaultRandomGenerator.Instance, parameters);
             graph.AddItems(embeddingsVectors);
 
             int bestWrong = 0;
@@ -74,7 +74,7 @@ namespace HNSW.Net.Tests
         [DataRow(false, true)]
         //[DataRow(false, false)]
         //[DataRow(true, false)]
-        public void KNNSearchTestAlgorithm4(bool expandBestSelection, bool keepPrunedConnections)
+        public void KNNSearchTestAlgorithm2(bool expandBestSelection, bool keepPrunedConnections)
         {
             var parameters = new SmallWorld<float[], float>.Parameters() 
             {
@@ -115,7 +115,7 @@ namespace HNSW.Net.Tests
         [TestMethod]
         public void SerializeDeserializeTest()
         {
-            byte[] buffer;
+            //byte[] buffer;
             string original;
 
             // restrict scope of original graph

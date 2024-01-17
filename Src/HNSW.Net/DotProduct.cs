@@ -8,7 +8,7 @@ using System.Numerics.Tensors;
 
 namespace HNSW.Net
 {
-    public static class DotProduct
+    public static class DotProductDistance
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float DotProductOptimized(float[] lhs, float[] rhs)

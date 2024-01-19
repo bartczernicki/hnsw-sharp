@@ -19,6 +19,7 @@
     <PackageTags>kNN, ANN, approximate nearest neighbor</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Optimize>true</Optimize>
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 
 

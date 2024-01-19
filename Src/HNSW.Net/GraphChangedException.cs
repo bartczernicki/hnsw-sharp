@@ -24,9 +24,9 @@ namespace HNSW.Net
         {
         }
 
-        protected GraphChangedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        //protected GraphChangedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //}
 
         internal static void ThrowIfChanged(ref long version, long versionAtStart)
         {

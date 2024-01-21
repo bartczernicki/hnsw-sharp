@@ -22,7 +22,7 @@ CompleteRealDataANN - Optimized benchmark using the HNSW algorithm
 
 ## Usage
 Check out the following code snippets once you've added the library reference to your project.
-##### How to build a graph?
+##### How to build a HNSW graph?
 ```c#
 var parameters = new SmallWorld<float[], float>.Parameters()
 {
@@ -35,7 +35,7 @@ var graph = new SmallWorld<float[], float>(DotProductDistance.DotProductOptimize
   parameters, threadSafe: true);
 graph.AddItems(vectors);
 ```
-##### How to run k-NN search?
+##### How to run k-NN search in a HNSW graph?
 ```c#
 SmallWorld<float[], float> graph = GetGraph();
 
@@ -43,7 +43,7 @@ float[] query = Enumerable.Repeat(1f, 100).ToArray();
 var best20 = graph.KNNSearch(query, 20);
 var best1 = best20.OrderBy(r => r.Distance).First();
 ```
-##### How to (de)serialize the graph?
+##### How to (de)serialize the HNSW graph?
 ```c#
 SmallWorld<float[], float> graph = GetGraph();
 byte[] buffer = graph.SerializeGraph(); // buffer stores information about parameters and graph edges

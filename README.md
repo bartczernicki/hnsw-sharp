@@ -3,9 +3,22 @@
 
 
 # HNSW.Net
-.Net library for fast approximate nearest neighbours search.
+.Net library for fast approximate nearest neighbours search using the HNSW (Hierarchical Navigitable Small Worlds) algorithm used in Pinecone, DataStax, Azure AI Search and other commercial vector databases.  
 
 Exact _k_ nearest neighbours search algorithms tend to perform poorly in high-dimensional spaces. To overcome curse of dimensionality the ANN algorithms come in place. This library implements one of such algorithms described in the ["Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs"](https://arxiv.org/ftp/arxiv/papers/1603/1603.09320.pdf) article. It provides simple API for building nearest neighbours graphs, (de)serializing them and running k-NN search queries.
+
+## Benchmarks  
+Benchmark search results from the https://github.com/bartczernicki/VectorMathAIOptimizations GitHub repository over 1 million real vectors from Wikipedia.  
+Linear - Non-optimized benchmark using O(n) linear performance degredation  
+Complete - Optimized benchmark with multi-threading, DotProduct, .NET 8 Tensors, AVX extensions using O(n) linear performance degredation  
+CompleteRealDataANN - Optimized benchmark using the HNSW algorithm  
+```
+| Method              | Mean          | Error     | StdDev    | Ratio    | RatioSD | Search queries / second |
+|-------------------- |--------------:|----------:|----------:|---------:|--------:|------------------------:|-
+| Linear              | 1,664.7444 ms | 0.3980 ms | 0.3723 ms | baseline |         |       0.63 queries / sec|
+| Complete            |    94.5493 ms | 1.8721 ms | 4.0299 ms |   -94.3% |    3.5% |      10.69 queries / sec| 
+| CompleteRealDataANN |     0.6453 ms | 0.0012 ms | 0.0011 ms |  -100.0% |    0.2% |   1,550.39 queries / sec|
+```
 
 ## Usage
 Check out the following code snippets once you've added the library reference to your project.
